@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
     res.send('Welcome!');
 });
 
+console.log('hello???');
 if (process.env.NODE_ENV === 'production') {
     console.log('is in production');
 } else {
