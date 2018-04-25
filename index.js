@@ -21,16 +21,11 @@ const app = express();
 
 // require('./routes/authRoutes')(app);
 
+console.log(keys.test);
+
 app.get('/', (req, res) => {
     res.send('Welcome!');
 });
-
-console.log('hello???');
-if (process.env.NODE_ENV === 'production') {
-    console.log('is in production');
-} else {
-    console.log(process.env.NODE_ENV);
-}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
