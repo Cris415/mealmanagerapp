@@ -9,7 +9,13 @@ module.exports = app => {
     );
 
     // Get the code once authenticated and return a userprofile
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    app.get(
+        '/auth/google/callback',
+        passport.authenticate('google'),
+        (req, res) => {
+            res.send('ok logged in');
+        }
+    );
 
     app.get('/api/logout', (req, res) => {
         req.logout();
