@@ -34,7 +34,7 @@ class Header extends Component {
                         to={this.props.auth ? '/dashboard' : '/'}
                         className="left brand-logo"
                     >
-                        MMA
+                        401 Magic Recipe Book
                     </Link>
                     <ul className="right">{this.renderContent()}</ul>
                 </div>
