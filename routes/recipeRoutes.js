@@ -1,9 +1,33 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
+const requireLogin = require('../middlewares/requireLogin');
 
 const Recipe = mongoose.model('recipes');
 
 module.exports = app => {
+    app.get('/api/recipe', requireLogin, async (req, res) => {
+        //  Get all of a user's recipes
+        const recipes = await Recipe.find({ _user: req.user.id });
+
+        res.send(recipes);
+    });
+
+    app.get('/api/recipe/:recipeId', async (req, res) => {
+        // Get a specific recipe
+        const recipe = await Recipe.findById(req.params.recipeId);
+        res.send(recipe);
+    });
+
+    app.get('/api/recipe/:date', async (req, res) => {
+        // TODO: Get recipes for a given day
+    });
+
+    app.delete('/api/recipe/:recipeId', async (req, res) => {
+        const deletedRecipe = await Recipe.remove({ _id: req.params.recipeId });
+        console.log('deleted', deletedRecipe);
+        res.send(deletedRecipe);
+    });
+
     app.post('/api/recipe', async (req, res) => {
         const {
             title,
@@ -15,15 +39,11 @@ module.exports = app => {
             dates,
         } = req.body;
 
-        // TODO: Break ingredients into array
-
-        // TODO: Break steps into array by \n steps.split('\n')
-
         const recipe = await new Recipe({
             title,
-            ingredients: recipients.split(','),
+            ingredients: ingredients.split(',').map(item => item.trim()),
             time,
-            steps,
+            steps: steps.split('\n'),
             image,
             source,
             _user: req.user.id,

@@ -6,7 +6,9 @@ import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
 import NewRecipe from './recipes/NewRecipe';
-const Dashboard = () => <h2>Dashboard</h2>;
+import RecipeList from './recipes/RecipeList';
+import Dashboard from './Dashboard';
+import RecipeShow from './recipes/RecipeShow';
 
 class App extends Component {
     componentDidMount() {
@@ -14,14 +16,20 @@ class App extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div className="">
                 <BrowserRouter>
                     <div>
                         <Header />
                         <Route exact path="/" component={Landing} />
                         <Route path="/dashboard" component={Dashboard} />
                         <Route path="/landing" component={Landing} />
-                        <Route path="/recipes/new" component={NewRecipe} />
+                        <Route
+                            exact
+                            path="/create/recipe"
+                            component={NewRecipe}
+                        />
+                        <Route exact path="/recipes" component={RecipeList} />
+                        <Route path="/recipes/:id" component={RecipeShow} />
                     </div>
                 </BrowserRouter>
             </div>

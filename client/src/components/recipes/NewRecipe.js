@@ -11,15 +11,14 @@ class NewRecipe extends Component {
         } = field;
 
         const className = `form-group ${touched && error ? 'red-text ' : ''}`;
-        console.log(field);
         if (field.input.name === 'steps') {
             return (
                 <div className={className}>
-                    <label> text area?</label>
+                    <label>{field.label}</label>
                     <textarea
-                        className="form-control"
-                        cols="30"
-                        rows="300"
+                        className="form-control materialize-textarea"
+                        // cols="30"
+                        // rows="300"
                         {...field.input}
                     />
                     <div className="text-help">{touched ? error : ''}</div>
@@ -36,13 +35,16 @@ class NewRecipe extends Component {
     }
     onSubmit(values) {
         this.props.createRecipe(values, () => {
-            this.props.history.push('/dashboard');
+            this.props.history.push('/recipes');
         });
     }
     render() {
         const { handleSubmit } = this.props;
         return (
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <form
+                onSubmit={handleSubmit(this.onSubmit.bind(this))}
+                className="container"
+            >
                 <Field
                     label="Title"
                     name="title"
@@ -68,10 +70,13 @@ class NewRecipe extends Component {
                     name="time"
                     component={this.renderField}
                 />
-                <button type="submit" className="btn btn-primary">
+                <button
+                    type="submit"
+                    className="btn btn-primary waves-effect waves-light right"
+                >
                     Submit
                 </button>
-                <Link className="btn btn-danger" to="/dashboard">
+                <Link className="btn red left" to="/dashboard">
                     Cancel
                 </Link>
             </form>
