@@ -17,8 +17,6 @@ class NewRecipe extends Component {
                     <label>{field.label}</label>
                     <textarea
                         className="form-control materialize-textarea"
-                        // cols="30"
-                        // rows="300"
                         {...field.input}
                     />
                     <div className="text-help">{touched ? error : ''}</div>
@@ -45,33 +43,34 @@ class NewRecipe extends Component {
                 onSubmit={handleSubmit(this.onSubmit.bind(this))}
                 className="container"
             >
+                <h3>Create a New Recipe!</h3>
                 <Field
                     label="Title"
                     name="title"
                     component={this.renderField}
                 />
                 <Field
-                    label="Ingredients"
+                    label="Ingredients, separated by commas"
                     name="ingredients"
                     component={this.renderField}
                 />
                 <Field
-                    label="Recipe Steps"
+                    label="Recipe instructions, new step with return key"
                     name="steps"
                     component={this.renderField}
                 />
                 <Field
-                    label="Image URl"
+                    label="Image URL"
                     name="image"
                     component={this.renderField}
                 />
                 <Field
-                    label="Recipe Total Time"
+                    label="Recipe total time in minutes"
                     name="time"
                     component={this.renderField}
                 />
                 <button
-                    type="submit"
+                    type="Submit"
                     className="btn btn-primary waves-effect waves-light right"
                 >
                     Submit

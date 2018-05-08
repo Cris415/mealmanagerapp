@@ -48,12 +48,13 @@ class Recipeshow extends Component {
                 <Link className="white-text" to="/recipes">
                     <button className="btn left">Back</button>
                 </Link>
-                <h4>{recipe.title}</h4>
+                <h4 style={{ paddingLeft: '120px' }}>{recipe.title}</h4>
                 <ul className="collection">
                     {this.renderIngredients(recipe.ingredients)}
                 </ul>
-                <p>time: {recipe.time}mins</p>
+                <p>Time: {recipe.time}mins</p>
                 <ul>{this.renderRecipe(recipe.steps)}</ul>
+
                 <Link className="white-text" to={`/api/recipe/${recipe._id}`}>
                     <button
                         className="btn btn-small red white-text right"
