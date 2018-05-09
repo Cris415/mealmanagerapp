@@ -1,0 +1,15 @@
+.logo {
+    display: inline-block;
+    font-size: 3rem;
+}
+.logo--first {
+    padding: 2px;
+    color: black;
+    font-family: Courier New, monospace;
+}
+.logo--second {
+    color: white;
+    background-color: black;
+    font-family: Trebuchet MS, sans-serif;
+    padding: 3px;
+}

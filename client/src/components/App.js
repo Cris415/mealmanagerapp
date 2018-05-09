@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -9,6 +9,7 @@ import NewRecipe from './recipes/NewRecipe';
 import RecipeList from './recipes/RecipeList';
 import Dashboard from './Dashboard';
 import RecipeShow from './recipes/RecipeShow';
+// const Direct = <Redirect to="/" />;
 
 class App extends Component {
     componentDidMount() {
@@ -27,6 +28,7 @@ class App extends Component {
                             path="/create/recipe"
                             component={NewRecipe}
                         />
+                        {/* <Route exact path="/recipes" render={Direct} /> */}
                         <Route exact path="/recipes" component={RecipeList} />
                         <Route path="/recipes/:id" component={RecipeShow} />
                     </div>
@@ -35,5 +37,8 @@ class App extends Component {
         );
     }
 }
+function mapStateToProps({ auth }) {
+    return { auth };
+}
 
-export default connect(null, actions)(App);
+export default connect(mapStateToProps, actions)(App);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipes } from '../../actions';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class RecipeList extends Component {
     componentDidMount() {
@@ -33,6 +33,9 @@ class RecipeList extends Component {
         });
     }
     render() {
+        if (!this.props.auth) {
+            return <Redirect to="/" />;
+        }
         return (
             <div className="container">
                 <Link className="btn left" to="/dashboard">
@@ -50,8 +53,8 @@ class RecipeList extends Component {
         );
     }
 }
-function mapStateToProps({ recipes }) {
-    return { recipes };
+function mapStateToProps({ recipes, auth }) {
+    return { recipes, auth };
 }
 
 export default connect(mapStateToProps, { fetchRecipes })(RecipeList);

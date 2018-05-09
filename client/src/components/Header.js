@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import './styles/header.css';
 
 class Header extends Component {
     renderContent() {
@@ -20,7 +21,7 @@ class Header extends Component {
                         <a href="/api/logout">Logout</a>
                     </li>,
                     <li key="payments">
-                        <a href="">payments</a>
+                        <a href="">Payments</a>
                     </li>,
                 ];
         }
@@ -29,12 +30,12 @@ class Header extends Component {
     render() {
         return (
             <nav>
-                <div className="nav-wrapper">
-                    <Link
-                        to={this.props.auth ? '/dashboard' : '/'}
-                        className="left brand-logo"
-                    >
-                        401 Magic Recipe Book
+                <div className="nav-wrapper deep-orange lighten-1">
+                    <Link to={this.props.auth ? '/dashboard' : '/'}>
+                        <div className="logo left brand-logo ">
+                            <span className="logo--first">Grub</span>
+                            <span className="logo--second">Quest</span>
+                        </div>
                     </Link>
                     <ul className="right">{this.renderContent()}</ul>
                 </div>

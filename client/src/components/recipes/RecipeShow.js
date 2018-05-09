@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipe, deleteRecipe } from '../../actions';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Recipeshow extends Component {
     componentDidMount() {
@@ -39,6 +39,10 @@ class Recipeshow extends Component {
     render() {
         const { recipe } = this.props;
 
+        if (!this.props.auth) {
+            return <Redirect to="/" />;
+        }
+
         if (!recipe) {
             return <div>Loading ..</div>;
         }
@@ -68,11 +72,12 @@ class Recipeshow extends Component {
     }
 }
 
-function mapStateToProps({ recipes }, ownProps) {
+function mapStateToProps({ recipes, auth }, ownProps) {
     return {
         recipe: recipes.filter(
             recipe => recipe._id === ownProps.match.params.id
         )[0],
+        auth,
     };
 }
 

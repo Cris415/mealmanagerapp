@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { createRecipe } from '../../actions';
 
 class NewRecipe extends Component {
@@ -37,6 +37,9 @@ class NewRecipe extends Component {
         });
     }
     render() {
+        if (!this.props.auth) {
+            return <Redirect to="/" />;
+        }
         const { handleSubmit } = this.props;
         return (
             <form
@@ -98,6 +101,10 @@ function validate(values) {
     return errors;
 }
 
+function mapStateToProps({ auth }) {
+    return { auth };
+}
+
 export default reduxForm({ validate, form: 'PostsNewForm' })(
-    connect(null, { createRecipe })(NewRecipe)
+    connect(mapStateToProps, { createRecipe })(NewRecipe)
 );
