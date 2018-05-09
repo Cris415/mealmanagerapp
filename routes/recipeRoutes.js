@@ -12,23 +12,22 @@ module.exports = app => {
         res.send(recipes);
     });
 
-    app.get('/api/recipe/:recipeId', async (req, res) => {
+    app.get('/api/recipe/:recipeId', requireLogin, async (req, res) => {
         // Get a specific recipe
         const recipe = await Recipe.findById(req.params.recipeId);
         res.send(recipe);
     });
 
-    app.get('/api/recipe/:date', async (req, res) => {
+    app.get('/api/recipe/:date', requireLogin, async (req, res) => {
         // TODO: Get recipes for a given day
     });
 
-    app.delete('/api/recipe/:recipeId', async (req, res) => {
+    app.delete('/api/recipe/:recipeId', requireLogin, async (req, res) => {
         const deletedRecipe = await Recipe.remove({ _id: req.params.recipeId });
-        console.log('deleted', deletedRecipe);
         res.send(deletedRecipe);
     });
 
-    app.post('/api/recipe', async (req, res) => {
+    app.post('/api/recipe', requireLogin, async (req, res) => {
         const {
             title,
             ingredients,
@@ -49,7 +48,7 @@ module.exports = app => {
             _user: req.user.id,
             dates,
         }).save();
-        console.log(recipe);
+
         res.send(recipe);
     });
 };
