@@ -21,14 +21,14 @@ class App extends Component {
                     <div>
                         <Header />
                         <Route exact path="/" component={Landing} />
-                        {/* <Route path="/dashboard" component={Dashboard} />
+                        <Route path="/dashboard" component={Dashboard} />
                         <Route
                             exact
                             path="/create/recipe"
                             component={NewRecipe}
                         />
                         <Route exact path="/recipes" component={RecipeList} />
-                        <Route path="/recipes/:id" component={RecipeShow} /> */}
+                        <Route path="/recipes/:id" component={RecipeShow} />
                     </div>
                 </BrowserRouter>
             </div>
