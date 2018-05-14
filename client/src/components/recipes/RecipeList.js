@@ -10,6 +10,7 @@ class RecipeList extends Component {
 
     renderRecipes() {
         let defaultImage = <i className="material-icons circle">image</i>;
+
         return this.props.recipes.map(recipe => {
             return (
                 <Link
@@ -17,7 +18,7 @@ class RecipeList extends Component {
                     key={recipe._id}
                     to={`/recipes/${recipe._id}`}
                 >
-                    {/* Display regular image default */}
+                    {/* Display image or default */}
                     {recipe.image ? (
                         <img
                             src={recipe.image}
@@ -27,7 +28,22 @@ class RecipeList extends Component {
                     ) : (
                         defaultImage
                     )}
-                    <h5 className="title">{recipe.title}</h5>
+                    <span className="black-text title">{recipe.title}</span>
+                    <p className="grey-text">
+                        {recipe.ingredients.map((ingredient, i, arr) => {
+                            if (arr.length === i + 1 && arr.length < 4) {
+                                return ingredient;
+                            }
+                            if (i + 1 > 2 && i < 3) {
+                                return ingredient + '...';
+                            }
+                            if (i < 3) {
+                                return ingredient + ', ';
+                            }
+
+                            return '';
+                        })}
+                    </p>
                 </Link>
             );
         });
@@ -38,17 +54,30 @@ class RecipeList extends Component {
         }
         return (
             <div className="container">
-                <Link className="btn left" to="/dashboard">
-                    Back
-                </Link>
+                <div
+                    style={{
+                        paddingTop: '10px',
+                    }}
+                >
+                    <Link className="btn left" to="/dashboard">
+                        Back
+                    </Link>
+                    <h4
+                        style={{
+                            paddingLeft: '20px',
+                            display: 'inline-block',
+                            margin: '0',
+                        }}
+                    >
+                        My Recipes
+                    </h4>
 
-                <h4 style={{ paddingLeft: '120px' }}>My Recipes</h4>
+                    <Link className="white-text btn right" to="/create/recipe">
+                        Create Recipe
+                    </Link>
+                </div>
 
                 <div className="collection">{this.renderRecipes()}</div>
-
-                <Link className="white-text" to="/create/recipe">
-                    <button className="btn right">Create Recipe</button>
-                </Link>
             </div>
         );
     }

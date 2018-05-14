@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipe, deleteRecipe } from '../../actions';
 import { Link, Redirect } from 'react-router-dom';
+import '../styles/recipe-show.css';
 
 class Recipeshow extends Component {
     componentDidMount() {
@@ -35,6 +36,12 @@ class Recipeshow extends Component {
             );
         });
     }
+    renderImage(recipe) {
+        if (!recipe.image) {
+            return;
+        }
+        return <img className="" src={recipe.image} alt={recipe.title} />;
+    }
 
     render() {
         const { recipe } = this.props;
@@ -52,14 +59,22 @@ class Recipeshow extends Component {
                 <Link className="white-text" to="/recipes">
                     <button className="btn left">Back</button>
                 </Link>
+
                 <h4 style={{ paddingLeft: '120px' }}>{recipe.title}</h4>
+
+                {this.renderImage(recipe)}
+
                 <ul className="collection">
                     {this.renderIngredients(recipe.ingredients)}
                 </ul>
-                <p>Time: {recipe.time}mins</p>
+
+                <p>Total Time: {recipe.time}mins</p>
+
                 <ul>{this.renderRecipe(recipe.steps)}</ul>
 
-                <Link className="white-text" to={`/api/recipe/${recipe._id}`}>
+                <p>Source: {recipe.source ? recipe.source : ' '}</p>
+
+                <Link to={`/api/recipe/${recipe._id}`}>
                     <button
                         className="btn btn-small red white-text right"
                         onClick={this.onDeleteClick.bind(this)}

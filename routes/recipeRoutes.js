@@ -8,7 +8,6 @@ module.exports = app => {
     app.get('/api/recipe', requireLogin, async (req, res) => {
         //  Get all of a user's recipes
         const recipes = await Recipe.find({ _user: req.user.id });
-
         res.send(recipes);
     });
 

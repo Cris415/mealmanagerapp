@@ -46,7 +46,7 @@ class NewRecipe extends Component {
                 onSubmit={handleSubmit(this.onSubmit.bind(this))}
                 className="container"
             >
-                <h3>Create a New Recipe!</h3>
+                <h4>Create a New Recipe!</h4>
                 <Field
                     label="Title"
                     name="title"
@@ -70,6 +70,11 @@ class NewRecipe extends Component {
                 <Field
                     label="Recipe total time in minutes"
                     name="time"
+                    component={this.renderField}
+                />
+                <Field
+                    label="Source"
+                    name="source"
                     component={this.renderField}
                 />
                 <button
@@ -97,7 +102,9 @@ function validate(values) {
     if (!values.steps) {
         errors.steps = 'Enter instructions for this recipe';
     }
-    //TODO: Validate time to be number
+    if (isNaN(values.time)) {
+        errors.time = 'Enter a number';
+    }
     return errors;
 }
 

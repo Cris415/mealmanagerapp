@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class Dashboard extends Component {
     render() {
+        if (!this.props.auth) {
+            return <Redirect to="/" />;
+        }
         return (
             <div className="container">
                 <Link to="/recipes" className="white-text">
@@ -14,5 +18,7 @@ class Dashboard extends Component {
         );
     }
 }
-
-export default Dashboard;
+function mapStateToProps({ auth }) {
+    return { auth };
+}
+export default connect(mapStateToProps)(Dashboard);
