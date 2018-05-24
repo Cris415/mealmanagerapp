@@ -5,6 +5,7 @@ import {
     FETCH_RECIPES,
     FETCH_RECIPE,
     DELETE_RECIPE,
+    FETCH_DATE_RECIPE,
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -32,4 +33,9 @@ export const deleteRecipe = (id, callback) => async dispatch => {
     await axios.delete(`/api/recipe/${id}`);
     callback();
     dispatch({ type: DELETE_RECIPE, payload: id }); //ID so reducer knows what recipe to delete
+};
+
+export const fetchRecipesDate = date => async dispatch => {
+    const res = await axios.get(`/api/recipe/date/${date}`);
+    dispatch({ type: FETCH_DATE_RECIPE, payload: res.data });
 };

@@ -9,6 +9,7 @@ import NewRecipe from './recipes/NewRecipe';
 import RecipeList from './recipes/RecipeList';
 import Dashboard from './Dashboard';
 import RecipeShow from './recipes/RecipeShow';
+
 // const Direct = <Redirect to="/" />;
 
 class App extends Component {

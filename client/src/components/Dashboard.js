@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import WeekView from './calendar/WeekView';
 
 class Dashboard extends Component {
     render() {
@@ -12,8 +13,7 @@ class Dashboard extends Component {
                 <Link to="/recipes" className="white-text">
                     <button className="btn right">My Recipes</button>
                 </Link>
-
-                <p>Welcome to your dashboard!</p>
+                <WeekView />
             </div>
         );
     }
