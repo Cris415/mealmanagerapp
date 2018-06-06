@@ -10,8 +10,6 @@ import RecipeList from './recipes/RecipeList';
 import Dashboard from './Dashboard';
 import RecipeShow from './recipes/RecipeShow';
 
-// const Direct = <Redirect to="/" />;
-
 class App extends Component {
     componentDidMount() {
         this.props.fetchUser();
@@ -29,8 +27,12 @@ class App extends Component {
                             path="/create/recipe"
                             component={NewRecipe}
                         />
-                        {/* <Route exact path="/recipes" render={Direct} /> */}
                         <Route exact path="/recipes" component={RecipeList} />
+                        <Route
+                            exact
+                            path="/date/recipe/:date"
+                            component={RecipeList}
+                        />
                         <Route path="/recipes/:id" component={RecipeShow} />
                     </div>
                 </BrowserRouter>

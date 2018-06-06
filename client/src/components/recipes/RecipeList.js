@@ -11,13 +11,20 @@ class RecipeList extends Component {
 
     renderRecipes() {
         return this.props.recipes.map(recipe => {
-            return <RecipeListItem recipe={recipe} key={recipe._id} />;
+            return (
+                <RecipeListItem
+                    recipe={recipe}
+                    date={this.props.match.params.date}
+                    key={recipe._id}
+                />
+            );
         });
     }
     render() {
         if (!this.props.auth) {
             return <Redirect to="/" />;
         }
+
         return (
             <div className="container">
                 <div
@@ -48,6 +55,7 @@ class RecipeList extends Component {
         );
     }
 }
+
 function mapStateToProps({ recipes, auth }) {
     return { recipes, auth };
 }

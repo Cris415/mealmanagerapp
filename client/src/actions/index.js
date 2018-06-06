@@ -6,6 +6,7 @@ import {
     FETCH_RECIPE,
     DELETE_RECIPE,
     FETCH_DATE_RECIPE,
+    ADD_DATE_RECIPE,
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -38,4 +39,10 @@ export const deleteRecipe = (id, callback) => async dispatch => {
 export const fetchRecipesDate = date => async dispatch => {
     const res = await axios.get(`/api/recipe/date/${date}`);
     dispatch({ type: FETCH_DATE_RECIPE, payload: res.data });
+};
+
+export const addDateRecipe = (date, id, callback) => async dispatch => {
+    const res = await axios.put(`/api/recipe/date/${id}/${date}`);
+    callback();
+    dispatch({ type: ADD_DATE_RECIPE, payload: res.data });
 };

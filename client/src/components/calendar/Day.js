@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { fetchRecipesDate } from '../../actions';
 import moment from 'moment';
 import RecipeListItem from '../recipes/RecipeListItem';
+import { Link } from 'react-router-dom';
 
 class Day extends Component {
     componentDidMount() {
-        console.log('fetching ', this.props.day.format('MM D YYYY'));
         this.props.fetchRecipesDate(this.props.day.format('MM D YYYY'));
     }
+
     componentWillReceiveProps(nextProps) {
         if (this.props.day.format() !== nextProps.day.format()) {
-            console.log('fetching ', nextProps.day.format('MM D YYYY'));
             this.props.fetchRecipesDate(nextProps.day.format('MM D YYYY'));
         }
     }
@@ -22,14 +22,27 @@ class Day extends Component {
         }
         return recipeArr.map(recipe => (
             <RecipeListItem key={recipe._id} recipe={recipe} />
-            // <h5 key={recipe._id}>{recipe.title}</h5>
         ));
     };
     render() {
         const { recipes, day } = this.props;
+
         return (
             <div>
-                <h4 style={{ marginBottom: '50px' }}>{day.format('dddd D')}</h4>
+                <Link
+                    className="right "
+                    to={`/date/recipe/${day.format('MM-D-YYYY')}`}
+                    style={{ display: 'inline-block' }}
+                >
+                    <i
+                        className="material-icons medium "
+                        style={{ color: 'grey' }}
+                    >
+                        add_circle
+                    </i>
+                </Link>
+                <h4 style={{ marginBottom: '20px' }}>{day.format('dddd D')}</h4>
+
                 <div className="collection">{this.renderRecipes(recipes)}</div>
             </div>
         );
@@ -37,6 +50,7 @@ class Day extends Component {
 }
 
 function mapStateToProps({ recipes }, ownProps) {
+    // Finds recipes in state pertaining to the date
     return {
         recipes: recipes.filter(
             recipe =>
