@@ -5,21 +5,25 @@ const requireLogin = require('../middlewares/requireLogin');
 const Recipe = mongoose.model('recipes');
 
 module.exports = app => {
-    app.put('/api/recipe/date/:recipeId', async (req, res) => {
+    app.put('/api/recipe/date/:recipeId/:date', async (req, res) => {
         // Add a date to a recipe
-        // let query = { _user: req.user.id, _id: req.params.recipeId };
-        let query = { _id: req.params.recipeId };
-        let date = new Date(req.body.date);
-        const updatedRecipe = await Recipe.findOneAndUpdate(query, {
-            $push: { dates: date },
-        });
+        let query = { _user: req.user.id, _id: req.params.recipeId };
+        // let query = { _id: req.params.recipeId };
+        let date = new Date(req.params.date);
+        const updatedRecipe = await Recipe.findOneAndUpdate(
+            query,
+            {
+                $push: { dates: date },
+            },
+            { new: true }
+        );
         res.send(updatedRecipe);
     });
 
     app.get('/api/recipe/date/:date', async (req, res) => {
         // Get recipes for a given day
         let date = new Date(req.params.date);
-        const recipes = await Recipe.find({ dates: date });
+        const recipes = await Recipe.find({ dates: date, _user: req.user.id });
         res.send(recipes);
     });
 
