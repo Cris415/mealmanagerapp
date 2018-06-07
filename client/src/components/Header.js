@@ -15,7 +15,6 @@ class Header extends Component {
                     </li>
                 );
             default:
-                //return array if adding more elements
                 return [
                     <li key="logout">
                         <a href="/api/logout">Logout</a>

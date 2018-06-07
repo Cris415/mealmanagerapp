@@ -19,7 +19,6 @@ class RecipeListItem extends Component {
         return (
             <div className="collection-item avatar">
                 <Link to={`/recipes/${recipe._id}`}>
-                    {/* Display image or default */}
                     {recipe.image ? (
                         <img
                             src={recipe.image}
@@ -36,9 +35,6 @@ class RecipeListItem extends Component {
                         style={{
                             width: '35%',
                             display: 'inline-block',
-                            // textOverflow: 'ellipsis',
-                            // overflow: 'hidden',
-                            // whiteSpace: 'nowrap',
                         }}
                     >
                         {recipe.ingredients.map((ingredient, i, arr) => {

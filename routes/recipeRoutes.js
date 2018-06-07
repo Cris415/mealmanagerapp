@@ -5,36 +5,12 @@ const requireLogin = require('../middlewares/requireLogin');
 const Recipe = mongoose.model('recipes');
 
 module.exports = app => {
-    app.put('/api/recipe/date/:recipeId/:date', async (req, res) => {
-        // Add a date to a recipe
-        let query = { _user: req.user.id, _id: req.params.recipeId };
-        // let query = { _id: req.params.recipeId };
-        let date = new Date(req.params.date);
-        const updatedRecipe = await Recipe.findOneAndUpdate(
-            query,
-            {
-                $push: { dates: date },
-            },
-            { new: true }
-        );
-        res.send(updatedRecipe);
-    });
-
-    app.get('/api/recipe/date/:date', async (req, res) => {
-        // Get recipes for a given day
-        let date = new Date(req.params.date);
-        const recipes = await Recipe.find({ dates: date, _user: req.user.id });
-        res.send(recipes);
-    });
-
     app.get('/api/recipe', requireLogin, async (req, res) => {
-        //  Get all of a user's recipes
         const recipes = await Recipe.find({ _user: req.user.id });
         res.send(recipes);
     });
 
     app.get('/api/recipe/:recipeId', requireLogin, async (req, res) => {
-        // Get a specific recipe
         const recipe = await Recipe.findById(req.params.recipeId);
         res.send(recipe);
     });
@@ -67,5 +43,24 @@ module.exports = app => {
         }).save();
 
         res.send(recipe);
+    });
+        app.put('/api/recipe/date/:recipeId/:date', async (req, res) => {
+        // Add a date to a recipe
+        let query = { _user: req.user.id, _id: req.params.recipeId };
+        let date = new Date(req.params.date);
+        const updatedRecipe = await Recipe.findOneAndUpdate(
+            query,
+            {
+                $push: { dates: date },
+            },
+            { new: true }
+        );
+        res.send(updatedRecipe);
+    });
+
+    app.get('/api/recipe/date/:date', async (req, res) => {
+        let date = new Date(req.params.date);
+        const recipes = await Recipe.find({ dates: date, _user: req.user.id });
+        res.send(recipes);
     });
 };

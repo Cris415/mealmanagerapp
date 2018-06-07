@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { changeWeek } from '../../actions';
 import moment from 'moment';
 import Day from './Day';
 

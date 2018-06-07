@@ -8,7 +8,6 @@ module.exports = app => {
         })
     );
 
-    // Get the code once authenticated and return a userprofile
     app.get(
         '/auth/google/callback',
         passport.authenticate('google'),
