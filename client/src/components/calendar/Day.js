@@ -24,6 +24,7 @@ class Day extends Component {
             <RecipeListItem key={recipe._id} recipe={recipe} />
         ));
     };
+
     render() {
         const { recipes, day } = this.props;
 

@@ -41,7 +41,7 @@ class WeekView extends Component {
     render() {
         return (
             <div className="container">
-                <header>
+                <span>
                     Week of{' '}
                     {moment()
                         .week(this.state.weekNumb)
@@ -52,17 +52,20 @@ class WeekView extends Component {
                         .week(this.state.weekNumb)
                         .day(6)
                         .format('Do')}
-                </header>
+                </span>
+
                 {this.renderDays()}
 
                 <button onClick={this.handleWeekChangeBack} className="btn">
-                    Last Week
+                    Previous Week
+                    <i className="material-icons small">arrow_back</i>
                 </button>
                 <button
                     onClick={this.handleWeekChangeForward}
                     className="btn right"
                 >
                     Next Week
+                    <i className="material-icons small">arrow_forward</i>
                 </button>
             </div>
         );

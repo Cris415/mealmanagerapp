@@ -31,11 +31,13 @@ class NewRecipe extends Component {
             </div>
         );
     }
+
     onSubmit(values) {
         this.props.createRecipe(values, () => {
             this.props.history.push('/recipes');
         });
     }
+
     render() {
         if (!this.props.auth) {
             return <Redirect to="/" />;
@@ -113,5 +115,8 @@ function mapStateToProps({ auth }) {
 }
 
 export default reduxForm({ validate, form: 'PostsNewForm' })(
-    connect(mapStateToProps, { createRecipe })(NewRecipe)
+    connect(
+        mapStateToProps,
+        { createRecipe }
+    )(NewRecipe)
 );
