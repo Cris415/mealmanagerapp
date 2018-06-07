@@ -17,8 +17,9 @@ class Recipeshow extends Component {
         });
     }
 
-    renderIngredients(list) {
-        return list.map(listItem => {
+    renderIngredients() {
+        const { ingredients } = this.props.recipe;
+        return ingredients.map(listItem => {
             return (
                 <li className="collection-item" key={listItem}>
                     {listItem}
@@ -27,8 +28,9 @@ class Recipeshow extends Component {
         });
     }
 
-    renderRecipe(list) {
-        return list.map((item, i) => {
+    renderRecipe() {
+        const { steps } = this.props.recipe;
+        return steps.map((item, i) => {
             return (
                 <li key={i}>
                     {i + 1}. {item}
@@ -36,11 +38,14 @@ class Recipeshow extends Component {
             );
         });
     }
-    renderImage(recipe) {
+
+    renderImage() {
+        const { recipe } = this.props;
+
         if (!recipe.image) {
             return;
         }
-        return <img className="" src={recipe.image} alt={recipe.title} />;
+        return <img src={recipe.image} alt={recipe.title} />;
     }
 
     render() {
@@ -62,17 +67,15 @@ class Recipeshow extends Component {
 
                 <h4 style={{ paddingLeft: '120px' }}>{recipe.title}</h4>
 
-                {this.renderImage(recipe)}
+                {this.renderImage()}
 
-                <ul className="collection">
-                    {this.renderIngredients(recipe.ingredients)}
-                </ul>
+                <ul className="collection">{this.renderIngredients()}</ul>
 
                 <p>Total Time: {recipe.time}mins</p>
 
-                <ul>{this.renderRecipe(recipe.steps)}</ul>
+                <ul>{this.renderRecipe()}</ul>
 
-                <p>Source: {recipe.source ? recipe.source : ' '}</p>
+                <p>Source: {recipe.source ? recipe.source : 'N/A'}</p>
 
                 <Link to={`/api/recipe/${recipe._id}`}>
                     <button
@@ -96,6 +99,7 @@ function mapStateToProps({ recipes, auth }, ownProps) {
     };
 }
 
-export default connect(mapStateToProps, { fetchRecipe, deleteRecipe })(
-    Recipeshow
-);
+export default connect(
+    mapStateToProps,
+    { fetchRecipe, deleteRecipe }
+)(Recipeshow);
