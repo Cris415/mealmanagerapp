@@ -33,7 +33,7 @@ export const fetchRecipe = id => async dispatch => {
 export const deleteRecipe = (id, callback) => async dispatch => {
     await axios.delete(`/api/recipe/${id}`);
     callback();
-    dispatch({ type: DELETE_RECIPE, payload: id }); 
+    dispatch({ type: DELETE_RECIPE, payload: id });
 };
 
 export const fetchRecipesDate = date => async dispatch => {

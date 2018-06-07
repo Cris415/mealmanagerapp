@@ -70,4 +70,7 @@ function mapStateToProps({ recipes }, ownProps) {
     };
 }
 
-export default connect(mapStateToProps, { fetchRecipesDate })(Day);
+export default connect(
+    mapStateToProps,
+    { fetchRecipesDate }
+)(Day);

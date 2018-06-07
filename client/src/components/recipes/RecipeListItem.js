@@ -11,6 +11,7 @@ class RecipeListItem extends Component {
             this.props.history.push('/dashboard');
         });
     };
+
     renderImage = () => {
         const { recipe } = this.props;
         const defaultImage = <i className="material-icons circle">image</i>;
@@ -20,6 +21,7 @@ class RecipeListItem extends Component {
             defaultImage
         );
     };
+
     renderIngredients = () => {
         // Only display the first three ingredients
         return this.props.recipe.ingredients.map((ingredient, i, arr) => {
@@ -50,6 +52,7 @@ class RecipeListItem extends Component {
             <div />
         );
     };
+
     render() {
         const { recipe } = this.props;
 
