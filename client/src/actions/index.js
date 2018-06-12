@@ -15,7 +15,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const createRecipe = (values, callback) => async dispatch => {
-    const res = await axios.post(`/api/recipe`, values);
+    const res = await axios.post('/api/recipe', values);
     callback();
     dispatch({ type: CREATE_RECIPE, payload: res.data });
 };
