@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchRecipesDate } from '../../actions';
-import moment from 'moment';
-import RecipeListItem from '../recipes/RecipeListItem';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { fetchRecipesDate } from '../../actions';
+import RecipeListItem from '../recipes/RecipeListItem';
 
 class Day extends Component {
     componentDidMount() {
@@ -16,22 +16,24 @@ class Day extends Component {
         }
     }
 
-    renderRecipes = recipeArr => {
-        if (!recipeArr.length) {
+    renderRecipes = () => {
+        const { recipes } = this.props;
+
+        if (!recipes.length) {
             return;
         }
-        return recipeArr.map(recipe => (
+        return recipes.map(recipe => (
             <RecipeListItem key={recipe._id} recipe={recipe} />
         ));
     };
 
     render() {
-        const { recipes, day } = this.props;
+        const { day } = this.props;
 
         return (
             <div>
                 <Link
-                    className="right "
+                    className="right"
                     to={`/date/recipe/${day.format('MM-D-YYYY')}`}
                     style={{ display: 'inline-block' }}
                 >
@@ -42,9 +44,10 @@ class Day extends Component {
                         add_circle
                     </i>
                 </Link>
+
                 <h4 style={{ marginBottom: '20px' }}>{day.format('dddd D')}</h4>
 
-                <div className="collection">{this.renderRecipes(recipes)}</div>
+                <div className="collection">{this.renderRecipes()}</div>
             </div>
         );
     }
