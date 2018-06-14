@@ -25,6 +25,7 @@ class WeekView extends Component {
             />
         ));
     };
+
     handleWeekChangeForward = () => {
         this.updateWeekNumb(1);
     };
@@ -57,9 +58,10 @@ class WeekView extends Component {
                 {this.renderDays()}
 
                 <button onClick={this.handleWeekChangeBack} className="btn">
-                    Previous Week
                     <i className="material-icons small">arrow_back</i>
+                    Previous Week
                 </button>
+
                 <button
                     onClick={this.handleWeekChangeForward}
                     className="btn right"
