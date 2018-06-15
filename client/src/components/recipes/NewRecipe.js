@@ -5,6 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { createRecipe } from '../../actions';
 
 class NewRecipe extends Component {
+    state = { redirect: false };
     renderField(field) {
         const {
             meta: { touched, error },
@@ -34,7 +35,7 @@ class NewRecipe extends Component {
 
     onSubmit(values) {
         this.props.createRecipe(values, () => {
-            this.props.history.push('/recipes');
+            this.setState({ redirect: true });
         });
     }
 
@@ -42,10 +43,13 @@ class NewRecipe extends Component {
         if (!this.props.auth) {
             return <Redirect to="/" />;
         }
-        const { handleSubmit } = this.props;
+        if (this.state.redirect) {
+            return <Redirect to="/dashboard" />;
+        }
+
         return (
             <form
-                onSubmit={handleSubmit(this.onSubmit.bind(this))}
+                onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}
                 className="container"
             >
                 <h4>Create a New Recipe!</h4>

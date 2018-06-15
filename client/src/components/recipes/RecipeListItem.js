@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
-import { addDateRecipe } from '../../actions';
 import { connect } from 'react-redux';
+import { addDateRecipe } from '../../actions';
 
 class RecipeListItem extends Component {
     state = { redirect: false };
     handleRecipeAdd = () => {
         this.props.addDateRecipe(this.props.date, this.props.recipe._id, () => {
-            // TODO: use the redirect component from react-router, change redirect to true.
-            this.props.history.push('/dashboard');
+            this.setState({ redirect: true });
         });
     };
 
