@@ -42,7 +42,7 @@ class RecipeListItem extends Component {
         return this.props.date ? (
             <button
                 onClick={this.handleRecipeAdd}
-                className="right btn "
+                className="right btn"
                 style={{ display: 'inline-block' }}
             >
                 <i className="material-icons ">add</i>

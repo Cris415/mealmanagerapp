@@ -24,6 +24,7 @@
         "materialize-css": "^0.100.2",
         "mongoose": "^5.0.16",
         "nodemon": "^1.17.3",
+        "npm": "^6.1.0",
         "passport": "^0.4.0",
         "passport-google-oauth20": "^1.0.0"
     },
