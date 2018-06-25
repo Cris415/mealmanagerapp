@@ -63,4 +63,16 @@ module.exports = app => {
         const recipes = await Recipe.find({ dates: date, _user: req.user.id });
         res.send(recipes);
     });
+
+    app.delete('/api/recipe/date/:recipeId/:date', async (req, res) => {
+        //Find the recipe that belongs to the date
+        let query = { _user: req.user.id, _id: req.params.recipeId };
+        let date = new Date(req.params.date);
+        //Find the date on the array
+        //Inside pullAll is where deleting stuff goes
+        // const updatedRecipe = await Recipe.update(query, { $pullAll: {dates: [date]} })
+        const updatedRecipe = await Recipe.findOneAndUpdate(query, { $pullAll: {dates: [date]} },  { new: true })
+        
+        res.send(updatedRecipe)
+    })
 };

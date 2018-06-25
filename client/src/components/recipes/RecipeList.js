@@ -15,6 +15,7 @@ class RecipeList extends Component {
                 <RecipeListItem
                     recipe={recipe}
                     date={this.props.match.params.date}
+                    addToDay
                     key={recipe._id}
                 />
             );

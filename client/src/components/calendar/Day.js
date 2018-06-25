@@ -23,12 +23,17 @@ class Day extends Component {
             return;
         }
         return recipes.map(recipe => (
-            <RecipeListItem key={recipe._id} recipe={recipe} />
+            <RecipeListItem key={recipe._id.toString() + this.props.day.format()} recipe={recipe} date={this.props.day.format('MM-D-YYYY')}/>
         ));
     };
 
     render() {
         const { day } = this.props;
+        if(this.renderRecipes()){
+
+            // console.log(this.renderRecipes().length)
+            console.log(this.props.recipes)
+        }
 
         return (
             <div>

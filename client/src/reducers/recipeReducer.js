@@ -3,7 +3,7 @@ import {
     FETCH_RECIPE,
     DELETE_RECIPE,
     FETCH_DATE_RECIPE,
-    ADD_DATE_RECIPE,
+    UPDATE_RECIPE
 } from '../actions/types';
 
 export default function(state = [], action) {
@@ -28,13 +28,12 @@ export default function(state = [], action) {
                 (item, index, self) =>
                     self.findIndex(t => t._id === item._id) === index
             );
-        case ADD_DATE_RECIPE:
+        case UPDATE_RECIPE:
             // Add the recipe with new date.
             // If state contains the recipe in the payload
             if (state.filter(recipe => recipe._id === action.payload._id)[0]) {
-                // return state minus the recipe equivalent to the one found in the payload, and include the payload recipe
                 return [
-                    ...state.filter(recipe => recipe._id !== action.payload.id),
+                    ...state.filter(recipe => recipe._id !== action.payload._id),
                     action.payload,
                 ];
             } else {

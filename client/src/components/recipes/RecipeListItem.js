@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addDateRecipe } from '../../actions';
+import { addDateRecipe, removeDateRecipe } from '../../actions';
 
 class RecipeListItem extends Component {
     state = { redirect: false };
@@ -37,9 +37,21 @@ class RecipeListItem extends Component {
             return '';
         });
     };
+    removeDate = () => {
+        const {date, recipe} = this.props
+        this.props.removeDateRecipe(date, recipe._id);
+    }
+
+    renderRemoveDateButton = () => {
+        return (
+            <div onClick={this.removeDate} className="right" style={{ display: 'inline-block' }}> 
+                <i className="material-icons">remove_cicle_outline</i>
+                </div>
+        )
+    }
 
     renderRecipeAddButton = () => {
-        return this.props.date ? (
+        return this.props.date && this.props.addToDay ? (
             <button
                 onClick={this.handleRecipeAdd}
                 className="right btn"
@@ -75,8 +87,9 @@ class RecipeListItem extends Component {
                         {this.renderIngredients()}
                     </p>
                 </Link>
-
+                        
                 {this.renderRecipeAddButton()}
+                {this.renderRemoveDateButton()}
             </div>
         );
     }
@@ -85,6 +98,6 @@ class RecipeListItem extends Component {
 export default withRouter(
     connect(
         null,
-        { addDateRecipe }
+        { addDateRecipe, removeDateRecipe }
     )(RecipeListItem)
 );
