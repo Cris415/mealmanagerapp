@@ -34,6 +34,10 @@ class Day extends Component {
 
     render() {
         const { day } = this.props;
+        // Debugging heroku.. Does day.js recieve the recipes?
+        if (this.props.recipes) {
+            console.log(this.props.recipes);
+        }
 
         return (
             <div>
