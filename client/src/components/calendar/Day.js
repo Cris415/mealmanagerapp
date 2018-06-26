@@ -79,6 +79,7 @@ function mapStateToProps({ recipes }, ownProps) {
                     second: 0,
                     millisecond: 0,
                 })
+                .utc()
                 .format(),
         );
     }
@@ -87,7 +88,9 @@ function mapStateToProps({ recipes }, ownProps) {
         console.log('recipe date before formatting', recipes[0].dates[0]);
         console.log(
             'are two dates equal? ',
-            moment(recipes[0].dates[0]).format() ===
+            moment(recipes[0].dates[0])
+                .utc()
+                .format() ===
                 ownProps.day
                     .set({
                         hour: 0,
@@ -95,6 +98,7 @@ function mapStateToProps({ recipes }, ownProps) {
                         second: 0,
                         millisecond: 0,
                     })
+                    .utc()
                     .format(),
         );
         // console.log('date on recipe', recipes[0].dates[0]);
