@@ -43,11 +43,11 @@ class RecipeListItem extends Component {
     }
 
     renderRemoveDateButton = () => {
-        return (
+        return this.props.removeDateBtn ? (
             <div onClick={this.removeDate} className="right" style={{ display: 'inline-block' }}> 
                 <i className="material-icons">remove_cicle_outline</i>
                 </div>
-        )
+        ) : (<div />)
     }
 
     renderRecipeAddButton = () => {

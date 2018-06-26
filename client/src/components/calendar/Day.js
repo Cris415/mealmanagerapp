@@ -23,7 +23,7 @@ class Day extends Component {
             return;
         }
         return recipes.map(recipe => (
-            <RecipeListItem key={recipe._id.toString() + this.props.day.format()} recipe={recipe} date={this.props.day.format('MM-D-YYYY')}/>
+            <RecipeListItem key={recipe._id.toString() + this.props.day.format()} recipe={recipe} date={this.props.day.format('MM-D-YYYY')} removeDateBtn/>
         ));
     };
 
