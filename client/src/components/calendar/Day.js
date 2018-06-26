@@ -84,7 +84,12 @@ function mapStateToProps({ recipes }, ownProps) {
         );
     }
     if (recipes[0]) {
-        console.log('date on recipe', moment(recipes[0].dates[0]).format());
+        console.log(
+            'date on recipe',
+            moment(recipes[0].dates[0])
+                .utc()
+                .format(),
+        );
         console.log('recipe date before formatting', recipes[0].dates[0]);
         console.log(
             'are two dates equal? ',
@@ -101,6 +106,10 @@ function mapStateToProps({ recipes }, ownProps) {
                     .utc()
                     .format(),
         );
+        console.log(
+            'equal? using moment!',
+            moment(ownProps.day).isSame(recipes[0].dates[0], 'day'),
+        );
         // console.log('date on recipe', recipes[0].dates[0]);
     }
 
@@ -108,19 +117,19 @@ function mapStateToProps({ recipes }, ownProps) {
         recipes: recipes.filter(
             recipe =>
                 recipe.dates.filter(
-                    date =>
-                        moment(date)
-                            .utc()
-                            .format() ===
-                        ownProps.day
-                            .set({
-                                hour: 0,
-                                minute: 0,
-                                second: 0,
-                                millisecond: 0,
-                            })
-                            .utc()
-                            .format(),
+                    date => moment(ownProps.day).isSame(date, 'day'),
+                    // moment(date)
+                    //     .utc()
+                    //     .format() ===
+                    // ownProps.day
+                    //     .set({
+                    //         hour: 0,
+                    //         minute: 0,
+                    //         second: 0,
+                    //         millisecond: 0,
+                    //     })
+                    //     .utc()
+                    //     .format(),
                 ).length,
         ),
     };
