@@ -84,6 +84,7 @@ function mapStateToProps({ recipes }, ownProps) {
     }
     if (recipes[0]) {
         console.log('date on recipe', moment(recipes[0].dates[0]).format());
+        console.log('recipe date before formatting', recipes[0].dates[0]);
         console.log(
             'are two dates equal? ',
             moment(recipes[0].dates[0]).format() ===
