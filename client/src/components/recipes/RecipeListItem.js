@@ -85,7 +85,7 @@ class RecipeListItem extends Component {
                         className="grey-text"
                         style={{
                             width: '35%',
-                            display: 'inline-block',
+                            display: 'inline-block'
                         }}>
                         {this.renderIngredients()}
                     </p>
@@ -100,6 +100,6 @@ class RecipeListItem extends Component {
 export default withRouter(
     connect(
         null,
-        { addDateRecipe, removeDateRecipe },
-    )(RecipeListItem),
+        { addDateRecipe, removeDateRecipe }
+    )(RecipeListItem)
 );

@@ -34,14 +34,6 @@ class Day extends Component {
 
     render() {
         const { day } = this.props;
-        // Debugging heroku.. Does day.js recieve the recipes?
-        if (this.props.recipes) {
-            console.log(
-                'Recipes in day.js day: ',
-                this.props.day.format(),
-                this.props.recipes,
-            );
-        }
 
         return (
             <div>
@@ -66,76 +58,17 @@ class Day extends Component {
 
 function mapStateToProps({ recipes }, ownProps) {
     // Finds recipes in state pertaining to the date
-
-    // Debugging heroku
-    console.log('mapStateToProps, before filtering for the day', recipes);
-    if (ownProps.day) {
-        console.log(
-            'date we are matching',
-            ownProps.day
-                .set({
-                    hour: 0,
-                    minute: 0,
-                    second: 0,
-                    millisecond: 0,
-                })
-                .utc()
-                .format(),
-        );
-    }
-    if (recipes[0]) {
-        console.log(
-            'date on recipe',
-            moment(recipes[0].dates[0])
-                .utc()
-                .format(),
-        );
-        console.log('recipe date before formatting', recipes[0].dates[0]);
-        console.log(
-            'are two dates equal? ',
-            moment(recipes[0].dates[0])
-                .utc()
-                .format() ===
-                ownProps.day
-                    .set({
-                        hour: 0,
-                        minute: 0,
-                        second: 0,
-                        millisecond: 0,
-                    })
-                    .utc()
-                    .format(),
-        );
-        console.log(
-            'equal? using moment!',
-            moment(ownProps.day).isSame(recipes[0].dates[0], 'day'),
-        );
-        // console.log('date on recipe', recipes[0].dates[0]);
-    }
-
     return {
         recipes: recipes.filter(
             recipe =>
-                recipe.dates.filter(
-                    date => moment(ownProps.day).isSame(date, 'day'),
-                    // moment(date)
-                    //     .utc()
-                    //     .format() ===
-                    // ownProps.day
-                    //     .set({
-                    //         hour: 0,
-                    //         minute: 0,
-                    //         second: 0,
-                    //         millisecond: 0,
-                    //     })
-                    //     .utc()
-                    //     .format(),
-                ).length,
-        ),
+                recipe.dates.filter(date =>
+                    moment(ownProps.day).isSame(date, 'day')
+                ).length
+        )
     };
 }
 
 export default connect(
     mapStateToProps,
-    { fetchRecipesDate },
+    { fetchRecipesDate }
 )(Day);
