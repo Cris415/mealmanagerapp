@@ -36,7 +36,11 @@ class Day extends Component {
         const { day } = this.props;
         // Debugging heroku.. Does day.js recieve the recipes?
         if (this.props.recipes) {
-            console.log(this.props.recipes);
+            console.log(
+                'Recipes in day.js day: ',
+                this.props.day.format(),
+                this.props.recipes,
+            );
         }
 
         return (
@@ -62,6 +66,9 @@ class Day extends Component {
 
 function mapStateToProps({ recipes }, ownProps) {
     // Finds recipes in state pertaining to the date
+
+    // Debugging heroku
+    console.log('mapStateToProps, before filtering for the day', recipes);
     return {
         recipes: recipes.filter(
             recipe =>
