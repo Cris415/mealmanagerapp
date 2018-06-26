@@ -69,10 +69,10 @@ function mapStateToProps({ recipes }, ownProps) {
 
     // Debugging heroku
     console.log('mapStateToProps, before filtering for the day', recipes);
-    if (this.props.day) {
+    if (ownProps.day) {
         console.log(
             'date we are matching',
-            this.props.day
+            ownProps.day
                 .set({
                     hour: 0,
                     minute: 0,
