@@ -110,8 +110,8 @@ function mapStateToProps({ recipes }, ownProps) {
                 recipe.dates.filter(
                     date =>
                         moment(date)
-                            .format()
-                            .utc() ===
+                            .utc()
+                            .format() ===
                         ownProps.day
                             .set({
                                 hour: 0,
