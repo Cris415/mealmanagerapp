@@ -31,8 +31,7 @@ class RecipeList extends Component {
                 <div
                     style={{
                         paddingTop: '10px',
-                    }}
-                >
+                    }}>
                     <Link className="btn left" to="/dashboard">
                         Back
                     </Link>
@@ -41,8 +40,7 @@ class RecipeList extends Component {
                             paddingLeft: '20px',
                             display: 'inline-block',
                             margin: '0',
-                        }}
-                    >
+                        }}>
                         My Recipes
                     </h4>
 
@@ -61,4 +59,7 @@ function mapStateToProps({ recipes, auth }) {
     return { recipes, auth };
 }
 
-export default connect(mapStateToProps, { fetchRecipes })(RecipeList);
+export default connect(
+    mapStateToProps,
+    { fetchRecipes },
+)(RecipeList);

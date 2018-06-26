@@ -50,8 +50,7 @@ class NewRecipe extends Component {
         return (
             <form
                 onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}
-                className="container"
-            >
+                className="container">
                 <h4>Create a New Recipe!</h4>
                 <Field
                     label="Title"
@@ -85,8 +84,7 @@ class NewRecipe extends Component {
                 />
                 <button
                     type="Submit"
-                    className="btn btn-primary waves-effect waves-light right"
-                >
+                    className="btn btn-primary waves-effect waves-light right">
                     Submit
                 </button>
                 <Link className="btn red left" to="/dashboard">
@@ -121,6 +119,6 @@ function mapStateToProps({ auth }) {
 export default reduxForm({ validate, form: 'PostsNewForm' })(
     connect(
         mapStateToProps,
-        { createRecipe }
-    )(NewRecipe)
+        { createRecipe },
+    )(NewRecipe),
 );

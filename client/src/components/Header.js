@@ -6,21 +6,21 @@ import './styles/header.css';
 class Header extends Component {
     renderContent() {
         switch (this.props.auth) {
-            case null:
-                return;
-            case false:
-                return (
-                    <li>
-                        <a href="/auth/google"> Login With Google </a>
-                    </li>
-                );
-            default:
-                return [
-                    <li key="logout">
-                        <a href="/api/logout">Logout</a>
-                    </li>,
-                    <li key="placeholder" />,
-                ];
+        case null:
+            return;
+        case false:
+            return (
+                <li>
+                    <a href="/auth/google"> Login With Google </a>
+                </li>
+            );
+        default:
+            return [
+                <li key="logout">
+                    <a href="/api/logout">Logout</a>
+                </li>,
+                <li key="placeholder" />,
+            ];
         }
     }
 

@@ -38,25 +38,29 @@ class RecipeListItem extends Component {
         });
     };
     removeDate = () => {
-        const {date, recipe} = this.props
+        const { date, recipe } = this.props;
         this.props.removeDateRecipe(date, recipe._id);
-    }
+    };
 
     renderRemoveDateButton = () => {
         return this.props.removeDateBtn ? (
-            <div onClick={this.removeDate} className="right" style={{ display: 'inline-block' }}> 
+            <div
+                onClick={this.removeDate}
+                className="right"
+                style={{ display: 'inline-block' }}>
                 <i className="material-icons">remove_cicle_outline</i>
-                </div>
-        ) : (<div />)
-    }
+            </div>
+        ) : (
+            <div />
+        );
+    };
 
     renderRecipeAddButton = () => {
         return this.props.date && this.props.addToDay ? (
             <button
                 onClick={this.handleRecipeAdd}
                 className="right btn"
-                style={{ display: 'inline-block' }}
-            >
+                style={{ display: 'inline-block' }}>
                 <i className="material-icons ">add</i>
             </button>
         ) : (
@@ -82,12 +86,10 @@ class RecipeListItem extends Component {
                         style={{
                             width: '35%',
                             display: 'inline-block',
-                        }}
-                    >
+                        }}>
                         {this.renderIngredients()}
                     </p>
                 </Link>
-                        
                 {this.renderRecipeAddButton()}
                 {this.renderRemoveDateButton()}
             </div>
@@ -98,6 +100,6 @@ class RecipeListItem extends Component {
 export default withRouter(
     connect(
         null,
-        { addDateRecipe, removeDateRecipe }
-    )(RecipeListItem)
+        { addDateRecipe, removeDateRecipe },
+    )(RecipeListItem),
 );

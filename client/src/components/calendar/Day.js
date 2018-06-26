@@ -23,29 +23,27 @@ class Day extends Component {
             return;
         }
         return recipes.map(recipe => (
-            <RecipeListItem key={recipe._id.toString() + this.props.day.format()} recipe={recipe} date={this.props.day.format('MM-D-YYYY')} removeDateBtn/>
+            <RecipeListItem
+                key={recipe._id.toString() + this.props.day.format()}
+                recipe={recipe}
+                date={this.props.day.format('MM-D-YYYY')}
+                removeDateBtn
+            />
         ));
     };
 
     render() {
         const { day } = this.props;
-        if(this.renderRecipes()){
-
-            // console.log(this.renderRecipes().length)
-            console.log(this.props.recipes)
-        }
 
         return (
             <div>
                 <Link
                     className="right"
                     to={`/date/recipe/${day.format('MM-D-YYYY')}`}
-                    style={{ display: 'inline-block' }}
-                >
+                    style={{ display: 'inline-block' }}>
                     <i
                         className="material-icons medium "
-                        style={{ color: 'grey' }}
-                    >
+                        style={{ color: 'grey' }}>
                         add_circle
                     </i>
                 </Link>
@@ -73,13 +71,13 @@ function mapStateToProps({ recipes }, ownProps) {
                                 second: 0,
                                 millisecond: 0,
                             })
-                            .format()
-                ).length
+                            .format(),
+                ).length,
         ),
     };
 }
 
 export default connect(
     mapStateToProps,
-    { fetchRecipesDate }
+    { fetchRecipesDate },
 )(Day);

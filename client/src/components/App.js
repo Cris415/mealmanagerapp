@@ -16,7 +16,7 @@ class App extends Component {
     }
     render() {
         return (
-            <div >
+            <div>
                 <BrowserRouter>
                     <div>
                         <Header />
@@ -44,4 +44,7 @@ function mapStateToProps({ auth }) {
     return { auth };
 }
 
-export default connect(mapStateToProps, actions)(App);
+export default connect(
+    mapStateToProps,
+    actions,
+)(App);

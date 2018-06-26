@@ -64,8 +64,7 @@ class WeekView extends Component {
 
                 <button
                     onClick={this.handleWeekChangeForward}
-                    className="btn right"
-                >
+                    className="btn right">
                     Next Week
                     <i className="material-icons small">arrow_forward</i>
                 </button>

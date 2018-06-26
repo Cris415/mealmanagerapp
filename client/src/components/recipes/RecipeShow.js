@@ -80,8 +80,7 @@ class Recipeshow extends Component {
                 <Link to={`/api/recipe/${recipe._id}`}>
                     <button
                         className="btn btn-small red white-text right"
-                        onClick={this.onDeleteClick.bind(this)}
-                    >
+                        onClick={this.onDeleteClick.bind(this)}>
                         Delete Recipe
                     </button>
                 </Link>
@@ -93,7 +92,7 @@ class Recipeshow extends Component {
 function mapStateToProps({ recipes, auth }, ownProps) {
     return {
         recipe: recipes.filter(
-            recipe => recipe._id === ownProps.match.params.id
+            recipe => recipe._id === ownProps.match.params.id,
         )[0],
         auth,
     };
@@ -101,5 +100,5 @@ function mapStateToProps({ recipes, auth }, ownProps) {
 
 export default connect(
     mapStateToProps,
-    { fetchRecipe, deleteRecipe }
+    { fetchRecipe, deleteRecipe },
 )(Recipeshow);
