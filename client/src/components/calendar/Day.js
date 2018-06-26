@@ -82,6 +82,22 @@ function mapStateToProps({ recipes }, ownProps) {
                 .format(),
         );
     }
+    if (recipes[0]) {
+        console.log('date on recipe', moment(recipes[0].dates[0]).format());
+        console.log(
+            'are two dates equal? ',
+            moment(recipes[0].dates[0]).format() ===
+                ownProps.day
+                    .set({
+                        hour: 0,
+                        minute: 0,
+                        second: 0,
+                        millisecond: 0,
+                    })
+                    .format(),
+        );
+        // console.log('date on recipe', recipes[0].dates[0]);
+    }
 
     return {
         recipes: recipes.filter(
