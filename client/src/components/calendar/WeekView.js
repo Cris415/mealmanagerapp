@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import Day from './Day';
+import { Link } from 'react-router-dom';
 
 class WeekView extends Component {
-    state = { weekNumb: moment().week() };
-
     renderDays = () => {
         let days = [
             'Sunday',
@@ -13,61 +12,45 @@ class WeekView extends Component {
             'Wednesday',
             'Thursday',
             'Friday',
-            'Saturday',
+            'Saturday'
         ];
 
         return days.map(day => (
             <Day
                 key={day}
-                day={moment()
-                    .week(this.state.weekNumb)
-                    .day(day)}
+                day={moment(this.props.day, 'MM-DD-YYYY').day(day)}
             />
         ));
-    };
-
-    handleWeekChangeForward = () => {
-        this.updateWeekNumb(1);
-    };
-    handleWeekChangeBack = () => {
-        this.updateWeekNumb(-1);
-    };
-
-    updateWeekNumb = dir => {
-        this.setState(prevState => ({
-            weekNumb: prevState.weekNumb + dir,
-        }));
     };
 
     render() {
         return (
             <div className="container">
-                <span>
-                    Week of{' '}
-                    {moment()
-                        .week(this.state.weekNumb)
-                        .day(0)
-                        .format('MMMM Do')}{' '}
-                    to{' '}
-                    {moment()
-                        .week(this.state.weekNumb)
-                        .day(6)
-                        .format('Do')}
-                </span>
-
                 {this.renderDays()}
 
-                <button onClick={this.handleWeekChangeBack} className="btn">
+                <Link
+                    to={
+                        '/dashboard/' +
+                        moment(this.props.day, 'MM-DD-YYYY')
+                            .subtract(1, 'week')
+                            .format('MM-D-YYYY')
+                    }
+                    className="btn">
                     <i className="material-icons small">arrow_back</i>
                     Previous Week
-                </button>
+                </Link>
 
-                <button
-                    onClick={this.handleWeekChangeForward}
+                <Link
+                    to={
+                        '/dashboard/' +
+                        moment(this.props.day, 'MM-DD-YYYY')
+                            .add(1, 'week')
+                            .format('MM-D-YYYY')
+                    }
                     className="btn right">
                     Next Week
                     <i className="material-icons small">arrow_forward</i>
-                </button>
+                </Link>
             </div>
         );
     }

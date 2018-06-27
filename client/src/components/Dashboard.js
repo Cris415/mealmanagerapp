@@ -13,7 +13,7 @@ class Dashboard extends Component {
                 <Link to="/recipes" className="white-text">
                     <button className="btn right">My Recipes</button>
                 </Link>
-                <WeekView />
+                <WeekView day={this.props.match.params.date} />
             </div>
         );
     }

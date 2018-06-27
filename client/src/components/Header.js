@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './styles/header.css';
+import moment from 'moment';
 
 class Header extends Component {
     renderContent() {
@@ -19,7 +20,7 @@ class Header extends Component {
                 <li key="logout">
                     <a href="/api/logout">Logout</a>
                 </li>,
-                <li key="placeholder" />,
+                <li key="placeholder" />
             ];
         }
     }
@@ -28,7 +29,12 @@ class Header extends Component {
         return (
             <nav>
                 <div className="nav-wrapper deep-orange lighten-1">
-                    <Link to={this.props.auth ? '/dashboard' : '/'}>
+                    <Link
+                        to={
+                            this.props.auth
+                                ? `/dashboard/${moment().format('MM-D-YYYY')}`
+                                : '/'
+                        }>
                         <div className="logo left brand-logo ">
                             <span className="logo--first">Grub</span>
                             <span className="logo--second">Quest</span>
