@@ -72,7 +72,7 @@ class RecipeListItem extends Component {
         const { recipe } = this.props;
 
         if (this.state.redirect) {
-            return <Redirect to="/dashboard" />;
+            return <Redirect to={`/dashboard/${this.props.date}`} />;
         }
         return (
             <div className="collection-item avatar">
