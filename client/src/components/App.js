@@ -21,7 +21,7 @@ class App extends Component {
                     <div>
                         <Header />
                         <Route exact path="/" component={Landing} />
-                        <Route path="/dashboard" component={Dashboard} />
+                        {/* <Route path="/dashboard" component={Dashboard} /> */}
                         <Route
                             exact
                             path="/create/recipe"
@@ -34,6 +34,7 @@ class App extends Component {
                             component={RecipeList}
                         />
                         <Route path="/recipes/:id" component={RecipeShow} />
+                        <Route path="/dashboard/:date" component={Dashboard} />
                     </div>
                 </BrowserRouter>
             </div>
@@ -46,5 +47,5 @@ function mapStateToProps({ auth }) {
 
 export default connect(
     mapStateToProps,
-    actions,
+    actions
 )(App);
