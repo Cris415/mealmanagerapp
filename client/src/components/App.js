@@ -33,6 +33,7 @@ class App extends Component {
                             component={RecipeList}
                         />
                         <Route path="/recipes/:id" component={RecipeShow} />
+                        <Route exact path="/dashboard" component={Dashboard} />
                         <Route path="/dashboard/:date" component={Dashboard} />
                     </div>
                 </BrowserRouter>

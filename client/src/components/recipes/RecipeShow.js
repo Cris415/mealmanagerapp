@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipe, deleteRecipe } from '../../actions';
 import { Link, Redirect } from 'react-router-dom';
+import BackButton from '../BackButton';
 import '../styles/recipe-show.css';
 
 class Recipeshow extends Component {
@@ -61,9 +62,7 @@ class Recipeshow extends Component {
 
         return (
             <div className="container">
-                <Link className="white-text" to="/recipes">
-                    <button className="btn left">Back</button>
-                </Link>
+                <BackButton />
 
                 <h4 style={{ paddingLeft: '120px' }}>{recipe.title}</h4>
 
@@ -92,13 +91,13 @@ class Recipeshow extends Component {
 function mapStateToProps({ recipes, auth }, ownProps) {
     return {
         recipe: recipes.filter(
-            recipe => recipe._id === ownProps.match.params.id,
+            recipe => recipe._id === ownProps.match.params.id
         )[0],
-        auth,
+        auth
     };
 }
 
 export default connect(
     mapStateToProps,
-    { fetchRecipe, deleteRecipe },
+    { fetchRecipe, deleteRecipe }
 )(Recipeshow);

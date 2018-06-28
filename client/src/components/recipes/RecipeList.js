@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchRecipes } from '../../actions';
 import { Link, Redirect } from 'react-router-dom';
 import RecipeListItem from './RecipeListItem';
+import BackButton from '../BackButton';
 
 class RecipeList extends Component {
     componentDidMount() {
@@ -30,16 +31,14 @@ class RecipeList extends Component {
             <div className="container">
                 <div
                     style={{
-                        paddingTop: '10px',
+                        paddingTop: '10px'
                     }}>
-                    <Link className="btn left" to="/dashboard">
-                        Back
-                    </Link>
+                    <BackButton />
                     <h4
                         style={{
                             paddingLeft: '20px',
                             display: 'inline-block',
-                            margin: '0',
+                            margin: '0'
                         }}>
                         My Recipes
                     </h4>
@@ -61,5 +60,5 @@ function mapStateToProps({ recipes, auth }) {
 
 export default connect(
     mapStateToProps,
-    { fetchRecipes },
+    { fetchRecipes }
 )(RecipeList);
