@@ -20,7 +20,7 @@ class Recipeshow extends Component {
     onDeleteClick() {
         const { id } = this.props.match.params;
         this.props.deleteRecipe(id, () => {
-            this.props.history.push('/recipes');
+            this.props.history.push('/dashboard');
         });
     }
 
@@ -86,14 +86,14 @@ class Recipeshow extends Component {
     }
 
     render() {
-        const { recipe } = this.props;
+        const { recipe, auth } = this.props;
 
-        if (!this.props.auth) {
+        if (!auth) {
             return <Redirect to="/" />;
         }
 
         if (!recipe) {
-            return <div>Loading ..</div>;
+            return <Redirect to="/dashboard" />;
         }
 
         return (
