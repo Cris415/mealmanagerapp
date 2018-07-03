@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class BackButton extends Component {
     static contextTypes = {
-        router: () => true
+        router: PropTypes.object
     };
 
     render() {

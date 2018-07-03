@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipe, deleteRecipe } from '../../actions';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import BackButton from '../BackButton';
+import ConfirmButton from '../parts/ConfirmButton';
 import '../styles/recipe-show.css';
 
 class Recipeshow extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { displayConfirm: false };
+    }
+
     componentDidMount() {
         const { id } = this.props.match.params;
         this.props.fetchRecipe(id);
@@ -17,6 +23,14 @@ class Recipeshow extends Component {
             this.props.history.push('/recipes');
         });
     }
+
+    displayConfirmToggle = () => {
+        if (this.state.displayConfirm) {
+            this.setState({ displayConfirm: false });
+        } else {
+            this.setState({ displayConfirm: true });
+        }
+    };
 
     renderIngredients() {
         const { ingredients } = this.props.recipe;
@@ -49,6 +63,28 @@ class Recipeshow extends Component {
         return <img src={recipe.image} alt={recipe.title} />;
     }
 
+    renderConfirmDelete() {
+        if (this.state.displayConfirm) {
+            return (
+                <div>
+                    <ConfirmButton>
+                        <button
+                            onClick={this.onDeleteClick.bind(this)}
+                            className="btn btn-small red white-text right">
+                            Delete
+                        </button>
+                        <button
+                            onClick={this.displayConfirmToggle}
+                            className="btn btn-small left">
+                            Back
+                        </button>
+                    </ConfirmButton>
+                </div>
+            );
+        }
+        return;
+    }
+
     render() {
         const { recipe } = this.props;
 
@@ -63,26 +99,18 @@ class Recipeshow extends Component {
         return (
             <div className="container">
                 <BackButton />
-
                 <h4 style={{ paddingLeft: '120px' }}>{recipe.title}</h4>
-
                 {this.renderImage()}
-
                 <ul className="collection">{this.renderIngredients()}</ul>
-
                 <p>Total Time: {recipe.time}mins</p>
-
                 <ul>{this.renderRecipe()}</ul>
-
                 <p>Source: {recipe.source ? recipe.source : 'N/A'}</p>
-
-                <Link to={`/api/recipe/${recipe._id}`}>
-                    <button
-                        className="btn btn-small red white-text right"
-                        onClick={this.onDeleteClick.bind(this)}>
-                        Delete Recipe
-                    </button>
-                </Link>
+                {this.renderConfirmDelete()}
+                <button
+                    className="btn btn-small red white-text right"
+                    onClick={this.displayConfirmToggle}>
+                    Delete Recipe
+                </button>
             </div>
         );
     }
