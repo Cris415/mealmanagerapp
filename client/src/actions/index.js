@@ -6,7 +6,7 @@ import {
     FETCH_RECIPE,
     DELETE_RECIPE,
     FETCH_DATE_RECIPE,
-    UPDATE_RECIPE,
+    UPDATE_RECIPE
 } from './types';
 
 export const fetchUser = () => async dispatch => {
